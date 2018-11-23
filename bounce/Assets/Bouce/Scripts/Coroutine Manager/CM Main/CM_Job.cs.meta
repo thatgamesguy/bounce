@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 67205dba436e94b49a3e4eea58900f5d
+labels:
+- Coroutine
+- Manager
+- Job
+timeCreated: 1449857909
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

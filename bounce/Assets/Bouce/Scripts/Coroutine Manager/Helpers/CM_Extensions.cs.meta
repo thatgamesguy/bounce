@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: ff95e2c89b1194390acfca4567761654
+labels:
+- Help
+- Helper
+- Job
+- Manager
+- Coroutine
+- Extensions
+timeCreated: 1450100561
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

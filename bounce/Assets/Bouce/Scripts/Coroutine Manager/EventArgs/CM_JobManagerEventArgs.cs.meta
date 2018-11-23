@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 766aeeb901ea4489986cfc3fd7527f65
+labels:
+- Event
+- Arguements
+- Job
+- Manager
+timeCreated: 1450101090
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

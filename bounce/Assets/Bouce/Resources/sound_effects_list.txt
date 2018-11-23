@@ -1,0 +1,8 @@
+//Asset Folder
+Audio
+
+
+//Group
+//group_name, clip_path_1, clip_path_2, ...
+piano_keys, Piano/piano_064, Piano/piano_063, Piano/piano_062, Piano/piano_061, Piano/piano_060, Piano/piano_059, Piano/piano_058, Piano/piano_057, Piano/piano_056, Piano/piano_055, Piano/piano_054
+drums, Drum/drum_03, Drum/drum_04, Drum/drum_05, Drum/drum_06, Drum/drum_013, Drum/drum_015, Drum/drum_016, Drum/drum_017, Drum/drum_018, Drum/drum_019, Drum/drum_020, Drum/drum_021, Drum/drum_022, Drum/drum_023, Drum/drum_024
