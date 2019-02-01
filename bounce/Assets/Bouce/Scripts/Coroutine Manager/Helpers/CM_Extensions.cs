@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Collections;
 
 namespace Bounce.CoroutineManager
@@ -18,28 +19,31 @@ namespace Bounce.CoroutineManager
 			return s == null || s.Equals ("");
 		}
 
-		/// <summary>
-		/// Clone the specified IEnumerator.
-		/// </summary>
-		/// <param name="source">Source.</param>
-		public static IEnumerator Clone (this IEnumerator source)
-		{
-			var sourceType = source.GetType ().UnderlyingSystemType;
-			var sourceTypeConstructor = sourceType.GetConstructors () [0]; 
-			var newInstance = sourceTypeConstructor.Invoke (null) as IEnumerator;
-		
-			var nonPublicFields = source.GetType ().GetFields (BindingFlags.NonPublic | BindingFlags.Instance);
-			var publicFields = source.GetType ().GetFields (BindingFlags.Public | BindingFlags.Instance);
-			foreach (var field in nonPublicFields) {
-				var value = field.GetValue (source);
-				field.SetValue (newInstance, value);
-			}
-			foreach (var field in publicFields) {
-				var value = field.GetValue (source);
-				field.SetValue (newInstance, value);
-			}
-		
-			return newInstance;
-		}
-	}
+        /// <summary>
+        /// Clone the specified IEnumerator.
+        /// </summary>
+        /// <param name="source">Source.</param>
+        public static IEnumerator Clone(this IEnumerator source)
+        {
+            var sourceType = source.GetType().UnderlyingSystemType;
+            var sourceTypeConstructor = sourceType.GetConstructor(new Type[] { typeof(Int32) });
+            var newInstance = sourceTypeConstructor.Invoke(new object[] { -2 }) as IEnumerator;
+
+            var nonPublicFields = source.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+            foreach (var field in nonPublicFields)
+            {
+                var value = field.GetValue(source);
+                field.SetValue(newInstance, value);
+            }
+
+            var publicFields = source.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var field in publicFields)
+            {
+                var value = field.GetValue(source);
+                field.SetValue(newInstance, value);
+            }
+
+            return newInstance;
+        }
+    }
 }

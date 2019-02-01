@@ -13,6 +13,7 @@ namespace Bounce
 		private bool m_InteractionEnabled;
 	    private ICharacterMovementModel m_MovementModel;
 		private GameObject m_Collision;
+        private Vector2 m_PreviousVelocity;
 
         /// <summary>
         /// Enables interaction with shapes.
@@ -44,49 +45,41 @@ namespace Bounce
 			interactable.Interact();
 		}
 
-		void OnCollisionEnter2D( Collision2D other )
+        void FixedUpdate()
+        {
+            if (m_MovementModel != null)
+            {
+                m_PreviousVelocity = m_MovementModel.GetVelocity();
+            }
+        }
+
+        void OnCollisionEnter2D( Collision2D other )
 		{
 			if (m_MovementModel != null) 
 			{
-				var localVel = transform.InverseTransformDirection( m_MovementModel.GetVelocity() );
+                Vector2 vec1 = m_PreviousVelocity;
+                Vector2 vec2 = m_MovementModel.GetVelocity();
+                float angle = Vector2.Angle(vec1, vec2);
 
-                Vector3[] dirs = new Vector3[9];
-
-				dirs[0] = ((Vector3)localVel - transform.position).normalized;
-				dirs[1] = Quaternion.AngleAxis(20.0f, Vector3.forward) * dirs[0];
-				dirs[2] = Quaternion.AngleAxis(-20.0f, Vector3.forward) * dirs[0];
-				dirs[3] = Quaternion.AngleAxis(40.0f, Vector3.forward) * dirs[0];
-				dirs[4] = Quaternion.AngleAxis(-40.0f, Vector3.forward) * dirs[0];
-				dirs[5] = Quaternion.AngleAxis(60.0f, Vector3.forward) * dirs[0];
-				dirs[6] = Quaternion.AngleAxis(-60.0f, Vector3.forward) * dirs[0];
-				dirs[7] = Quaternion.AngleAxis(70.0f, Vector3.forward) * dirs[0];
-				dirs[8] = Quaternion.AngleAxis(-70.0f, Vector3.forward) * dirs[0];
-
-                foreach (var dir in dirs)
+                if(Mathf.Abs(angle) > 2f)
                 {
-                    var hit = Physics2D.Raycast(transform.position, dir, 1.5f, reflectMask);
-
-                    if (hit.collider != null)
-                    {
-                        m_Collision = other.gameObject;
-                        break;
-                    }
+                    m_Collision = other.gameObject;
                 }
-			}
+
+            }
 
 
 		}
 
 		void OnCollisionExit2D( Collision2D other )
 		{
-
-			if( m_Collision != null && other.gameObject.GetInstanceID() == m_Collision.GetInstanceID () )
+            if ( m_Collision != null && other.gameObject.GetInstanceID() == m_Collision.GetInstanceID () )
 			{
 				m_Collision = null;
 
 				if( ShouldInteract() )
 				{
-					InteractIfPossible( other.gameObject );
+                    InteractIfPossible( other.gameObject );
 				}
 			}
 		}

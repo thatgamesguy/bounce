@@ -20,9 +20,11 @@ namespace Bounce
         void Start()
         {
 			m_LineRenderer.material = lineMaterial;
-			m_LineRenderer.SetColors ( startColour, endColour );
-            m_LineRenderer.SetWidth(0.2f, 0.2f);
-            m_LineRenderer.SetVertexCount(2);
+            m_LineRenderer.startColor = startColour;
+            m_LineRenderer.endColor = endColour;
+            m_LineRenderer.startWidth = 0.2f;
+            m_LineRenderer.endWidth = 0.2f;
+            m_LineRenderer.positionCount = 2;
         }
 
         public void SetStart( Vector2 start )
